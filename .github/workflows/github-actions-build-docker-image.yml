@@ -1,0 +1,36 @@
+name: Build Docker Image
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set output
+        id: vars
+        run: |
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+          echo ::set-output name=angular::`echo ${GITHUB_REF#refs/*/} | sed -E 's/v([^-]+)-.*/\1/'`
+          echo ::set-output name=node::`echo ${GITHUB_REF#refs/*/} | sed -E 's/[^-]+-(.*)/\1/'`
+      - name: Check output
+        env:
+          TAG_VERSION: ${{ steps.vars.outputs.tag }}
+          NG_CLI_VERSION: ${{ steps.vars.outputs.angular }}
+          NODE_VERSION: ${{ steps.vars.outputs.node }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: |
+          echo $TAG_VERSION
+          echo $NG_CLI_VERSION
+          echo $NODE_VERSION
+          docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_TOKEN}
+          docker build \
+            --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+            --build-arg NODE_VERSION=${NODE_VERSION} \
+            --build-arg NG_CLI_VERSION=${NG_CLI_VERSION} \
+            -t bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION} .
+          docker push bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}
