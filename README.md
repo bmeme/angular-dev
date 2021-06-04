@@ -2,7 +2,7 @@
 
 This image provides a node container with Angular CLI installed.
 
-[![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-success)](https://github.com/bmeme/angular-dev) ![GitHub last commit](https://img.shields.io/github/last-commit/bmeme/angular-dev) [![GitHub issues](https://img.shields.io/github/issues/bmeme/angular-dev)](https://github.com/bmeme/angular-dev/issues) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bmeme/angular-dev)
+[![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-success)](https://github.com/bmeme/angular-dev) ![GitHub last commit](https://img.shields.io/github/last-commit/bmeme/angular-dev) [![GitHub issues](https://img.shields.io/github/issues/bmeme/angular-dev)](https://github.com/bmeme/angular-dev/issues) ![GitHub top language](https://img.shields.io/github/languages/top/bmeme/angular-dev) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bmeme/angular-dev)
 
 ## How to build
 
@@ -37,6 +37,8 @@ docker run --rm -it bmeme/angular-dev:11.2.5-14.16.0 ng version
 ## Use Bmeme docker images from Docker Hub
 
 Instead of building the docker image yourself, you can use our [bmeme/angular-dev images from Docker Hub](https://hub.docker.com/r/bmeme/angular-dev).
+
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/bmeme/angular-dev) ![Docker Pulls](https://img.shields.io/docker/pulls/bmeme/angular-dev)
 
 ## Contributing
 
