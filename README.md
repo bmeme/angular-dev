@@ -2,7 +2,7 @@
 
 This image provides a node container with Angular CLI installed.
 
-[![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-success)](https://github.com/bmeme/angular-dev) ![GitHub last commit](https://img.shields.io/github/last-commit/bmeme/angular-dev) [![GitHub issues](https://img.shields.io/github/issues/bmeme/angular-dev)](https://github.com/bmeme/angular-dev/issues)
+[![Maintained? Yes](https://img.shields.io/badge/Maintained%3F-Yes-success)](https://github.com/bmeme/angular-dev) ![GitHub last commit](https://img.shields.io/github/last-commit/bmeme/angular-dev) [![GitHub issues](https://img.shields.io/github/issues/bmeme/angular-dev)](https://github.com/bmeme/angular-dev/issues) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bmeme/angular-dev)
 
 ## How to build
 
