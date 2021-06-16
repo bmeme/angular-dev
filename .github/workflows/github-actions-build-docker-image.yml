@@ -14,12 +14,16 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-          echo ::set-output name=angular::`echo ${GITHUB_REF#refs/*/} | sed -E 's/v([^-]+)-.*/\1/'`
+          echo ::set-output name=angular_full::`echo ${GITHUB_REF#refs/*/} | sed -E 's/v([^-]+)-.*/\1/'`
+          echo ::set-output name=angular_minor::`echo ${GITHUB_REF#refs/*/} | sed -E 's/v([0-9]+\.?[0-9]*)\.?.*/\1/'`
+          echo ::set-output name=angular_major::`echo ${GITHUB_REF#refs/*/} | sed -E 's/v([0-9]+)\.?.*/\1/'`
           echo ::set-output name=node::`echo ${GITHUB_REF#refs/*/} | sed -E 's/[^-]+-(.*)/\1/'`
       - name: Check output
         env:
           TAG_VERSION: ${{ steps.vars.outputs.tag }}
-          NG_CLI_VERSION: ${{ steps.vars.outputs.angular }}
+          NG_CLI_VERSION: ${{ steps.vars.outputs.angular_full }}
+          NG_CLI_MINOR: ${{ steps.vars.outputs.angular_full }}
+          NG_CLI_MAJOR: ${{ steps.vars.outputs.angular_major }}
           NODE_VERSION: ${{ steps.vars.outputs.node }}
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
@@ -32,5 +36,10 @@ jobs:
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
             --build-arg NODE_VERSION=${NODE_VERSION} \
             --build-arg NG_CLI_VERSION=${NG_CLI_VERSION} \
-            -t bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION} .
+            -t bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION} \
+            -t bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION} \
+            -t bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION} \
+            .
+          docker push bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}
+          docker push bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}
           docker push bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}

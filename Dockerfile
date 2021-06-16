@@ -1,8 +1,15 @@
 ARG NODE_VERSION
 FROM node:${NODE_VERSION}-buster-slim
 
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y chromium ca-certificates ansible openssh-client rsync && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ARG NG_CLI_VERSION
 RUN npm install -g @angular/cli@$NG_CLI_VERSION
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV SCULLY_PUPPETEER_EXECUTABLE_PATH '/usr/bin/chromium'
 
 ARG BUILD_DATE
 
