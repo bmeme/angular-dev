@@ -1,5 +1,5 @@
 ARG NODE_VERSION
-FROM node:${NODE_VERSION}-buster-slim
+FROM node:${NODE_VERSION}-bullseye-slim
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y chromium ca-certificates ansible openssh-client rsync && \
