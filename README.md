@@ -12,6 +12,15 @@ This image provides a node container with Angular CLI installed and support to b
 - ansible
 - rsync
 
+## Vanilla versions
+
+The image is built also in two vanilla flavours, one based on `bullseye-slim` and one on `alpine` versions of node docker image.
+
+This version has only the Angular CLI added on top of the base node image.
+
+To use one of this versions add `-bullseye-slim` or `-alpine` suffix to the standard image.
+See [tags list](https://hub.docker.com/r/bmeme/angular-dev/tags) on DockerHub for further details.
+
 ## How to build
 
 To build the docker image you can use the `docker build` command.
