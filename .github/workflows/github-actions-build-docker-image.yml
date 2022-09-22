@@ -43,3 +43,27 @@ jobs:
           docker push bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}
           docker push bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}
           docker push bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}
+          docker build \
+            -f alpine/Dockerfile \
+            --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+            --build-arg NODE_VERSION=${NODE_VERSION} \
+            --build-arg NG_CLI_VERSION=${NG_CLI_VERSION} \
+            -t bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}-alpine \
+            -t bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}-alpine \
+            -t bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}-alpine \
+            .
+          docker push bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}-alpine
+          docker push bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}-alpine
+          docker push bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}-alpine
+          docker build \
+            -f bullseye-slim/Dockerfile \
+            --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+            --build-arg NODE_VERSION=${NODE_VERSION} \
+            --build-arg NG_CLI_VERSION=${NG_CLI_VERSION} \
+            -t bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}-bullseye-slim \
+            -t bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}-bullseye-slim \
+            -t bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}-bullseye-slim \
+            .
+          docker push bmeme/angular-dev:${NG_CLI_MAJOR}-${NODE_VERSION}-bullseye-slim
+          docker push bmeme/angular-dev:${NG_CLI_MINOR}-${NODE_VERSION}-bullseye-slim
+          docker push bmeme/angular-dev:${NG_CLI_VERSION}-${NODE_VERSION}-bullseye-slim
