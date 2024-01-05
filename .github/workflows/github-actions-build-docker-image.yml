@@ -25,13 +25,13 @@ jobs:
           NG_CLI_MINOR: ${{ steps.vars.outputs.angular_minor }}
           NG_CLI_MAJOR: ${{ steps.vars.outputs.angular_major }}
           NODE_VERSION: ${{ steps.vars.outputs.node }}
-          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           echo $TAG_VERSION
           echo $NG_CLI_VERSION
           echo $NODE_VERSION
-          docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_TOKEN}
+          docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_TOKEN}
           docker build \
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
             --build-arg NODE_VERSION=${NODE_VERSION} \
